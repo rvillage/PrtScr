@@ -1,0 +1,25 @@
+version: 2
+
+jobs:
+  screen_capture:
+    working_directory: ~/prtscr
+    docker:
+      - image: circleci/node:9-browsers
+    steps:
+      - checkout
+      - run:
+          name: Install font
+          command: sudo apt-get install fonts-ipafont fonts-ipaexfont
+      - run: ./screen-capture.sh
+      - run:
+          name: Send slack
+          command: |
+            curl https://upload.gyazo.com/api/upload -F access_token=${GYAZO_ACCESS_TOKEN} -F imagedata=@image.jpg | jq -r '.url' > image_url
+            curl -X POST -H "Content-type: application/json" --data "{'text':'$(cat image_url)'}" ${SLACK_WEBHOOK_URL}
+
+workflows:
+  version: 2
+
+  workflow:
+    jobs:
+      - screen_capture
