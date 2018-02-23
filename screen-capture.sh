@@ -1,4 +1,4 @@
 #!/bin/sh
 
-google-chrome --headless --disable-gpu --screenshot --window-size=667,375 https://www.google.co.jp
-convert screenshot.png -crop '667x375+0+0' image.jpg
+google-chrome --headless --disable-gpu --screenshot --window-size=800,1200 http://sekai-kabuka.com/bitcoin.html
+convert screenshot.png -crop '755x630+20+400' image.jpg
