@@ -23,6 +23,6 @@ workflows:
   daily:
     triggers:
       - schedule:
-          cron: "0 0,9 * * *"
+          cron: "30 0,9,10 * * *"
     jobs:
       - screen_capture
